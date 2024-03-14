@@ -1,0 +1,75 @@
+189. Rotate Array
+
+Solution 1: Circular Linked List
+*  build a circle linked list class.
+	*  a node class
+	*  a head pointer and size
+	*  an add method
+*  Move the head for (len - 4)
+*  update the value of num
+
+class Solution {
+    public void rotate(int[] nums, int k) {
+        // *  build a circle linked list class.
+	    // *  a node class
+        // *  a head pointer and size
+        // *  an add method
+        CircularlyLinkedList CLL = new CircularlyLinkedList();
+        for (int num : nums) {
+            CLL.addNode(num);
+            // System.out.println(CLL.tail.data);
+        }
+        CLL.tail.next = CLL.head;
+        
+        // *  Move the head for (len - k)
+        // k can be greater than size. So use k mod size.
+        // if k < size, k mod size = k
+        int move=0;
+        if (k <= CLL.size) move = CLL.size - k;
+        else move = CLL.size - k % CLL.size;
+
+        for (int i=0; i<move; ++i) {
+            CLL.head = CLL.head.next;
+            CLL.tail = CLL.tail.next;
+        }
+        // *  update the value of num
+        Node curr = CLL.head;
+        for (int i=0; i<CLL.size; ++i) {
+            nums[i] = curr.data;
+            curr = curr.next;
+        }
+
+
+    }
+    class Node {
+            int data;
+            Node next;
+            Node(int data, Node next) {
+                this.data = data;
+                this.next = next;
+            }
+        }
+    class CircularlyLinkedList {
+        Node head = null, tail = null;
+        int size = 0;
+
+        void addNode(int data) {
+            // create the new node
+            Node newNode = new Node(data, null);
+            // check if size == 0, set head and tail to new node
+            if (size == 0) {
+                head = newNode;
+                tail = newNode;
+            }
+            else {
+            // else, add new node to tail, update tail
+                tail.next = newNode;
+                tail = newNode;
+            }
+            // update size
+            ++size;
+        }
+
+        
+    }
+}
