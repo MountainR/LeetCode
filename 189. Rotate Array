@@ -73,3 +73,45 @@ class Solution {
         
     }
 }
+
+Solution 2: reverse for 3 times
+* Rotate the whole array
+	* 1234567 -> 7654321, k=3
+* Rotate two subarrays
+	* 7654321 -> 5671234
+
+To rotate an array, I can switch the ith element with len-i th element. Until i = len / 2(do not contain len/2)
+To rotate a subarray, I can set the len to the index I want to stop.
+So basically, rotate array will get an array, start, end indexes and return an array.
+
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int length = nums.length;
+        // deal with k == 0 and k >= length
+        k = k % length; 
+        if (k != 0) {
+            // * reverse the whole array
+            //    * 1234567 -> 7654321, k=3
+            nums = reverse(nums, 0, length-1);
+            //* reverse two subarrays
+            //    * 7654321 -> 5671234
+            nums = reverse(nums, 0, k-1);
+            nums = reverse(nums, k, length-1);
+        }
+    }
+    // 
+    // To reverse an array, I can switch the ith element with len-i th element. Until i = len / 2(do not contain len/2)
+    // To reverse a subarray, I can set the len to the index I want to stop.
+    // So basically, reverse array will get an array, start, end indexes and return an array.
+    public int[] reverse(int[] nums, int start, int end) {
+        int mid = (end - start) / 2 + start;
+        for (int i=start; i<=mid; ++i) {
+            int temp = nums[i];
+            nums[i] = nums[end-i+start];
+            nums[end-i+start] = temp;
+            
+        }
+        return nums;
+    }
+
+}
