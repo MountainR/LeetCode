@@ -1,0 +1,17 @@
+import java.util.Arrays;         // Arrays.sort()
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        // Convert s and t to arrays
+        char[] sArr = s.toCharArray();
+        char[] tArr = t.toCharArray();
+        // Sort s and t
+        Arrays.sort(sArr);       // Arrays.sort() for sorting an array
+        Arrays.sort(tArr);
+        // Compare s and t
+        return Arrays.equals(sArr, tArr);
+        // Use Arrays.equals() when you want to compare the contents of two arrays.
+        // Use == when you want to check if two references point to the same array object in memory.
+
+    }
+}
