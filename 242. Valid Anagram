@@ -1,0 +1,43 @@
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        // check length
+        if (s.length() != t.length() || s.length() == 0) {
+            return false;
+        }
+        // count freq
+        HashMap<Character, Integer> mapS = new HashMap<>();
+        HashMap<Character, Integer> mapT = new HashMap<>();
+        for (int i=0; i<s.length(); ++i) {
+            // Count s
+            char chS = s.charAt(i);
+            if (mapS.containsKey(chS)) {
+                int value = mapS.get(chS);
+                value += 1;
+                mapS.put(chS, value);
+            }
+            else {
+                mapS.put(chS, 1);
+            }
+            // Count t
+            char chT = t.charAt(i);
+            if (mapT.containsKey(chT)) {
+                int value = mapT.get(chT);
+                value += 1;
+                mapT.put(chT, value);
+            }
+            else {
+                mapT.put(chT, 1);
+            }
+        }
+        // compare freq
+        for (int i=0; i<s.length(); ++i) {
+            char ch = s.charAt(i);
+            if (mapT.get(ch) == null || mapS.get(ch) != mapT.get(ch)) {
+                return false;
+            }
+
+        }
+        return true;
+
+    }
+}
