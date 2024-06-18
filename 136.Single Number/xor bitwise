@@ -1,0 +1,15 @@
+/*
+XOR bitwise operation:
+A xor 0 = A
+A xor A = 0
+Commutative and associative law
+*/
+class Solution {
+    public int singleNumber(int[] nums) {
+        int ret = 0;
+        for (int num : nums) {
+            ret ^= num;
+        }
+        return ret;
+    }
+}
